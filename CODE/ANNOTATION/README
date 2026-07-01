@@ -1,0 +1,42 @@
+This directory contains all scripts necessary to run the annotation pipeline described in section 4 of the Methods. 
+
+The workflow is:
+
+1. Download the target genome and query proteomes/sequences/profiles. For example, in the paper, I use 
+- melanogaster proteome as proxy for ancestral gene repertoire: RefSeq GCF_000001215.4
+- three bacterial genomes: GCF_009914215.2, GCF_009913655.1, GCF_016584425.1
+- Dipteran transposon sequences from DFAM (included here as DFAM_Dipteran_seqs.fasta
+- HMMER profiles for PFAM domains associated with transposons, included here in the directory TE_DATABASE
+
+2. Run the following homology searches. The indicated bash/sbatch files will run the search for you and output the results in a format compatible with the rest of the pipeline. You can merely change the corresponding input files, listed at the top of the scripts, to reproduce the results in the paper. If you wish to substitute the files in 1) above, you can switch out their names in the code.  
+a) TBLASTN with the ancestral gene repertoire: ancestral_tblastn.sh
+b) TBLASTN with bacterial genome(s): bacterial_tblastn.sh
+c) BLASTN with DFAM sequences: DFAM_blastn.sh
+d) HMMSCAN: hmmscan.sh. (This should be run with the HMM(s) as the database and a six-frame translation of the target genome as the query. You can make such a translation with esl-translate (genome).)
+
+3. Create a list of the accessions and descriptions in your ancestral protein repertoire. This will be used to transform short accessions into descriptions that are "human readable" and easily interpretable with visual scanning. 
+You can make this from a fasta file with: grep \> (file) | cut -c 2- 
+Here I have included the one for the melanogaster proteome: Dmel_accession_info
+
+4. Concatenate results from multiple bacterial searches into one BLAST output file (with cat is fine) 
+
+5. Run the bash/sbatch script annotation_pipeline.sh, substituting the names of the relevant files: 
+main_blast = output from a)
+bacterial_blast = output from b) 
+TE_blast = output from c) 
+protein_list: the file in 3.
+
+6. Make a separate GFF for the HMMER genomic search with make_hmmer_gff.sh, substituting names of the relevant files:
+(This order is not logically necessary, but I have found it helpful to have it as a separate GFF, so wrote the workflow this way.) 
+hmmeroutfile= output from d)
+orflist= list of ORFs in your six-frame genomic translation; can be generated from the fasta with grep \> (file) | cut -c 2-
+outfilename= your chosen output file name for the HMMER GFF
+
+7. Make final GFF by running make_final_gff.sh and substituting file names accordingly:
+ The annotation_pipeline.sh script above will have generated two files, one ending in main_hits_HR, the other ending in extra_hits_pars_HR. 
+main= main_hits_HR output
+extra= extra_hits_pars_HR
+outfilename= Your chosen output file name for an intermediate GFF; not that important. 
+hmmgff= outfilename from 6 above
+mergedoutfilename= name of your final GFF. 
+

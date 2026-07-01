@@ -1,0 +1,23 @@
+This directory contains annotations for each species discussed in the manuscript, in GFF format. 
+These are compatible with Integrated Genome Viewer, allowing for visualization of genomic regions and tinkering loci. 
+IGV also requires an indexed fasta file for the corresponding genome. These can be downloaded from NCBI using the accessions provided in Table S6 and indexed with samtools faidx.
+Information is contained in the following columns: 
+1. Contig, matching the assemblies listed in Table S6. 
+4. Start position of feature on contig. 
+5. End position of feature on contig. 
+7. Strand of feature. 
+9. "Description" column. This contains the following substrings, which are taken by IGV and thus displayed for ease of viewing: 
+- ID: (Start-stop)/Length, where these refer to the reference feature, e.g. the start and stop positions relative to the melanogaster protein or DFAM query sequence; 
+accession of the reference feature (e.g. RefSeq accession of the melanogaster protein, or DFAM ID of the transposon)
+genomestart_genomeend: start and end positions of feature on genome. (Required to make the feature ID unique and thus displayed by IGV.) 
+- Name: same as ID. 
+- Description: the E-value of the hit upon which the annotation is based, relative to the reference feature.
+- Color: the IGV display color in HEX code format. This corresponds to one of three feature categories, allowing for easy visual recognition of tinkering features: 
+Warm colors: gene duplicates and fragments. 
+Cool colors: conserved exons. 
+Shades of gray: transposons. 
+
+Each species has only one annotation combining all of these features. If you wish to analyze one separately, you can use the three "extraction_keys" files to extract rows in the relevant annotation category: 
+grep -f (extraction key file for category) (GFF) > GFF_category
+
+

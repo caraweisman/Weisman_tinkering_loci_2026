@@ -1,0 +1,21 @@
+=== codeml M0 results (single omega over whole tree) ===
+  parameter                        F3x4            F61
+  omega (dN/dS)                 0.47865        0.43403
+  SE(omega)                     0.14192       0.129408
+  kappa (ts/tv)                 1.49148         1.4195
+  log-likelihood               -781.655        -737.59
+  tree length                  0.377494       0.378447
+  tree length (dN)               0.0995         0.0978
+  tree length (dS)               0.2079         0.2254
+  F3x4 approx 95% CI: [0.2005, 0.7568]
+  F61 approx 95% CI: [0.1804, 0.6877]
+
+  codons used    = 134
+  tree topology  = ((Dath-from-genome, Daff-from-IsoSeq), Dazt-from-genome);
+
+=== yn00 pairwise cross-check ===
+  pair                                                       omega       dN       dS
+  Daff-from-IsoSeq vs Dath-from-genome                      0.5995   0.0444   0.0740
+  Dazt-from-genome vs Dath-from-genome                      0.5798   0.0838   0.1446
+  Dazt-from-genome vs Daff-from-IsoSeq                      0.4337   0.0730   0.1683
+

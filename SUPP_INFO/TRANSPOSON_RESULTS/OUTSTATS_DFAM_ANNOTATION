@@ -1,0 +1,8 @@
+starting
+fragments with no matching parental exon: 85 of 5126
+flank TE density - nonparental conserved exons: n 114142 mean 0.003757829720873999 median 0.0
+flank TE density - parental conserved exons: n 1651 mean 0.008513749242883102 median 0.0
+flank TE density - fragments: n 5126 mean 0.04938895825204838 median 0.0
+flank TE density - intergenic controls: n 5126 mean 0.07424135778384705 median 0.0
+MWU nonparental vs parental exons: p 7.51112115457488e-26 q 1.502224230914976e-25 direction parental higher
+MWU fragments vs intergenic controls: p 0.07742455518033338 q 0.07742455518033338 direction fragments higher

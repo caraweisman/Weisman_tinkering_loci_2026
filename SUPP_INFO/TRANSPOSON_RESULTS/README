@@ -1,0 +1,14 @@
+This directory contains transposon density result files. 
+
+1. OUTSTATS_(ANNOTATION TYPE) files, describing the density of transposons around each of the four types of regions, and comparing these densities between
+- tinkering locus fragments vs intergenic control regions
+- parental vs nonparental exons
+(as described in the text.) 
+2. "density" files: lists of numbers that describe the percent of flanking sequence around each of the features in the four types annotated as a transposon, used to generate Fig. 3d.
+3. subtype_TE_enrichment_(ANNOTATION TYPE): statistical analysis of each TE subfamily in the two annotation types and their enrichment, depletion, or nonsignificance in two comparisons
+- tinkering locus fragments vs intergenic control regions
+- parental vs nonparental exons
+(as described in the text.)
+
+** note: some output files contain the string RNAPROT. This is the same as RNA-based annotations that contain PFAM transposon domain annotations. 
+

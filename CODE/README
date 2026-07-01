@@ -1,0 +1,6 @@
+These files allow running of the HMM for tinkering locus identification. 
+They require downloading the genome fasta and performing an annotation (or using the annotation files provided in this repo). 
+They also require producing a contig_lengths file as described in the .sh file. 
+You can run that .sh file as a bash or slurm script to perform the analysis. 
+
+

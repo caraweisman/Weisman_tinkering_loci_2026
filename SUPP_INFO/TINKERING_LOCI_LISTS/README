@@ -1,0 +1,8 @@
+This folder contains a list of tinkering loci annotated as described in the methods (and using the code included in this repository) for each species. 
+The format of each file is: 
+One tinkering locus per row, formatted as
+CONTIG:START-END
+The contig names match the assemblies listed in Supplemental Table 6. 
+
+
+

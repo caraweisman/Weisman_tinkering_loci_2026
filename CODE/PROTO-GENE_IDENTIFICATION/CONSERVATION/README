@@ -1,0 +1,15 @@
+This contains code, files, and/or instructions for generating files from other files in this repo or public online to reproduce the conservation analysis of fragments
+that is an input into the proto-gene identification in the above subdirectory. 
+
+The pipeline can be run via the bash/slurm script conservation_pipeline.sh. 
+Some files must be downloaded from NCBI or generated from another folder in this repo and moved here; the top of the pipeline file describes this in more detail. 
+
+The pipeline should be run for every desired outgroup species; I used all five in the affinis group. 
+For each species, it generates an output file
+synteny_results_table_(species) 
+These can be combined to generate the final list of conservation status for fragment used in proto-gene identification with the script RESULTS/compile_cons_results.py ; 
+move the individual species' results tables to this file and run this script to do so. 
+The resulting compiled conservation list can also be found in the above proto-gene identification directory as an input file necessary to run that analysis: conservation_results 
+
+
+

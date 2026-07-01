@@ -1,0 +1,33 @@
+This directory contains code and supplementary files necessary to perform the evolutionary dynamics analyses, and the results.
+
+1. Begin by running the pairwise_flux_pipeline.sh in the PAIRWISE_FLUX directory. This should be done separately for each outgroup species in your analysis
+(in the paper, these are: D. athabasca, D. algonquin, D. azteca, D. helvetica). 
+Their genome assemblies can be downloaded from NCBI per Supplemental Table 6. 
+This will generate three output files per specis: 
+- (species)_duplicate_flux
+- (species)_fragment_flux
+- focal_TL_coverage(species)
+These should be moved into the FLUX subdirectory and the RATE_HETEROGENEITY subdirectory.
+
+2. Move into the FLUX subdirectory and run flux_pipeline.sh. 
+This will perform flux analysis for a) gained fragments and b) duplicate fragments. 
+Each analysis will produce two output files: 
+- Total_(gained/duplicate)frags_flux_numbers_sufficient_coverage: A list of each tinkering locus and the flux over the phylogeny.
+- (Gained/duplicate)frags_flux_IDs_sufficient coverage: A list of each tinkering locus and the names of the fragments included in the flux, listed by species. 
+These files are for loci with sufficient coverage in outgroups for a reasonably reliable analysis. Copies are included here. 
+
+3. Move into the RATE_HETEROGENEITY subidrectory and run rate_heterogeneity_pipeline.sh. 
+This will perform phylogenetic rate heterogeneity analysis for a) gained fragments and b) duplication (/deletion) of fragments. 
+Each analysis will produce two output files: 
+- Phylogenetic_analysis_fragment_(gain/duplication)_aggregated_per_branch_(FDR): a list of each branch, their expected/observed fragment event counts, and the resulting raw (first file) or FDR-corrected p-value.
+(All branches have sufficient power.)
+- Phylogenetic_analysis_fragment_(gain/duplication)_per_branch_per_locus: a list of each branch-locus pair, their expected/observed counts, and the resulting raw p-value. 
+It will also print to the console an aggregated analysis of the distribution of p-values, from which the statistics in the paper are derived. Power for indivdiual loci is low, so significance
+is assessed by comparing the enrichment of low p-values in the real data to the expected under the null. These statistics are printed to the terminal. 
+This will say something like
+enrichment of loci with at least one significant branch (locus-level test):
+  threshold p<0.05: m_capable=122, observed=49, expected=15.13, excess=33.87, two-tailed p=8.23208168299061e-12
+(m_capable is the number of powered loci)
+
+
+

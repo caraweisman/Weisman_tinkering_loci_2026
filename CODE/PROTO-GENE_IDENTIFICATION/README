@@ -1,0 +1,57 @@
+This directory contains code to identify affinis-specific proto-genes. 
+
+1. Start by running main_pipeline.sh in the current directory. This will generate some output files that then need to be moved to separate subdirectorie for analysis of separate categories of proto-genes. 
+
+2. SINGLETONS
+- Move the files 
+allfeature_reads_M_out_gffinfo_TLREADSONLY_analysis_withreads_CODINGORFS_DAFF_SPECIFIC 
+and
+allfeature_reads_F_out_gffinfo_TLREADSONLY_analysis_withreads_CODINGORFS_DAFF_SPECIFIC
+to the SINGLETONS sudirectory. 
+- run singleton_pipeline.sh.
+This will produce a file
+allfeature_reads_F_out_gffinfo_TLREADSONLY_analysis_withreads_CODINGORFS_DAFF_SPECIFIC_SINGLETONSONLYallfeature_reads_M_out_gffinfo_TLREADSONLY_analysis_withreads_CODINGORFS_DAFF_SPECIFIC_SINGLETONSONLY_AGGREGATED_iso_collapsed
+(sorry for the long name) 
+which contains a list of each encoded singleton PROTEIN (repeating loci that generate multiple encoded PROTEINS, with format: 
+column 1: ORF type (all singleton here) 
+column 2: melanogaster gene ID of coding fragment
+column 3: number of supporting reads
+columns 4+: all fragments on transcript. this may exceed 1, even for singletons, but will all be from the same melanogaster protein (e.g. different exons). 
+It will also produce a file
+SUMMARY_OUTFILE
+which contains information on the number of LOCI (aggregating over proto-proteins from the same locus, i.e. isoforms).
+
+3. COMPOSITES
+- Move the files
+allfeature_reads_M_out_gffinfo_TLREADSONLY_analysis_withreads_CODINGORFS_DAFF_SPECIFIC
+and
+allfeature_reads_F_out_gffinfo_TLREADSONLY_analysis_withreads_CODINGORFS_DAFF_SPECIFIC
+to the COMPOSITES sudirectory.
+- run composite_pipeline.sh.
+This will produce a file
+allfeature_reads_F_out_gffinfo_TLREADSONLY_analysis_withreads_CODINGORFS_DAFF_SPECIFIC_NCCHIMSONLYallfeature_reads_M_out_gffinfo_TLREADSONLY_analysis_withreads_CODINGORFS_DAFF_SPECIFIC_NCCHIMSONLY_AGGREGATED_iso_collapsed
+(sorry for the long and confusing name; NCCHIMS here stands for NONCODING CHIMERAS, aka COMPOSITES) 
+which contains a list of each encoded composite PROTEIN (repeating loci that generate multiple encoded PROTEINS), with format
+column 1: ORF type (all singleton here: this refers to the number of components in the coding ORF, which for composites is just 1, aka a singleton. Confusing naming.)
+column 2: melanogaster gene ID of coding fragment
+column 3: number of supporting reads
+columns 4+: all fragments on transcript. this number will vary, but will always contain at least two different melanogaster proteins. 
+It will also produce a file
+SUMMARY_OUTFILE
+which contains information on the number of LOCI (aggregating over proto-proteins from the same	locus, i.e. isoforms).
+
+4. CHIMERAS 
+- Move the files
+CHIMERIC_ORF_POSITION_INFO_TL_reads_(M/F).fna_ORIENTED_m_esltrans
+TL_reads_(M/F).fna_ORIENTED_m_esltrans
+allfeature_reads_(M/F)_out_gffinfo_TLREADSONLY_analysis_withreads
+into the CHIMERAS directory. 
+- Download all outgroup genomes from NCBI and place them in the CHIMERAS directory. 
+- Run chimera_pipeline.sh.
+This will produce two output files ending in 
+_chimeric_byprot_bylocus_DAFFSPECIFIC
+one for each sex, which list the number of encoded chimeric PROTEINS.
+NB: I  manually collapsed a chimera that has multiple loci by the definition used here (overlapping sets of fragments), but which are the result of a tandem duplication, such that it was misleading to count
+them independently. These will also appear here, so the total will appear much higher than it actually is (The numbers in the manuscript are accurate). 
+ However, there are few enough chimeras that manual curation is feasible. 
+Also NB: some of these will appear to be in the non-tinkering locus portion of the genome. However, I manually removed these, as they result from a tandem duplication that started at a tinkering locus and 'spilled over.' 

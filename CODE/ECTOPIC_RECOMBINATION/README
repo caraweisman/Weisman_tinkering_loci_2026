@@ -1,0 +1,36 @@
+This is the code to perform the ectopic recombination analyses described in the paper: 
+1. assess the rate of shared sequence in the flanking region (here set to 2500 nt, but an adjustable parameter) between tinkering locus fragmetns and their parental exons, 
+and compare it to the rate with randomly selected control exons
+2. assess the relative number of tinkering locus fragments that share sequence with regions around the parental exon on their parental transcripts vs. flanking regions around their parental exoms
+at the genomic level to assess the signatures of ectopic recombination versus retrotransposition
+
+Both of these are included in the same pipeline, pipeline_recombination.sh, which you can run. 
+** you will have to download the affinis genome from NCBI, per Table S6. 
+** you will also have to uncompress the file feature_positions_on_reads_REPREADS.tsv.gz, gzipped here to fit within the Github file size limits. 
+The pipeline relies on clustering of transcripts of conserved genes for 2) above. You can run it with my results from this step, included in this directory. If you wish to reproduce this,
+move into the CONSERVED_TRANSCRIPTS subdirectory and follow the instructions there. 
+
+
+Output files for the result from 1 (included here) are: 
+recombination_hits: hits from the blast search between tinkering locus fragment flanking sequences and flanking sequences from their parental exons. 
+CONTROL_recombination_hits: the same hits, for searches between fragments and randomly selected control exons. 
+The number of fragments with hits in each category can be found by counting the number of unique fragments in each of the two files:  
+cat (file) | awk '{print $1}' | sort | uniq | wc -l
+And the fraction that these comprise of all tinkering locus fragments can be found by dividing this number by the total number of fragments (lines in the TL_frags.gff file). 
+This is what gives the 49% vs 3% result reported in the paper. 
+
+Output files for the result from 2 (included here) are: 
+FULLTX_Compiled_recomb_TX_info
+This is a list of each fragment and
+- whether its flanking sequence has shared sequence with parental exons at the DNA level (Recomb_hit? = True/False) 
+- whether its flanking sequence has shared sequence with flanking regions around parental exons of any detected isoform of parental gene, i.e. at the transcript level (TX_hit? = True/False) 
+- whether there was simply no detected transcript for the parental gene (Missing_TX?), rendering the second point above meaningless
+- an assessment of the combination of these results (STATUS): 
+if Recomb_hit = True, TX_hit = False, Missing_TX = False, then the fragment is most consistent with recombination (Status = RECOMB)
+if Recomb_hit =	False, TX_hit = True, then the fragment is most consistent with retrotransposition (Status = TX) 
+if Recomb_hit =	True, TX_hit = True, then the fragment is consistent with both and uninformative (Status = TIE) 
+if Recomb_hit = True, TX_hit = False, then the fragment has no support for either and is uninformative (Status=NEITHER) 
+The number of fragments in the two informative categories can be counted by 
+cat FULLTX_Compiled_recomb_TX_info | grep (RECOMB/TX) | wc -l 
+which gives the 7x higher rate of RECOMB fragments than TX fragments reported in the manuscript. 
+
