@@ -2,7 +2,7 @@ These folders contain code, intermediate files, and supplemental information rel
 
 There are two main directories: CODE and SUPP_INFO. 
 CODE contains custom slurm, bash and python scripts to reproduce the results from the manuscript.
-SUPP_INFO contains information underlying results and figures reported in the manuscript that are too large to be included as supplemental informatio there.
+SUPP_INFO contains information underlying results and figures reported in the manuscript that are too large to be included as supplemental information there.
 
 Inside each directory (CODE, SUPP_INFO) are folders with descriptive names corresponding to analyses or figures described in the paper. These are fairly self-explanatory. 
 Each subdirectory contains a README with more specific instructions and information.
