@@ -10,4 +10,4 @@ Each subdirectory contains a README with more specific instructions and informat
 Some analyses require downloading genome assemblies from NCBI, which were too large to include here. When necessary, this is indicated in the README in each subdirectory.
 Accessions for these can be found in Table S6 of the paper. 
 
-Questions are welcome and should be directed to Caroline Weisman, cara.weisman@gmail.com
+Inquiries and requests for clarification are welcome, and should be directed to Caroline Weisman, cara.weisman@gmail.com
